@@ -12,8 +12,7 @@ public class BuildScr : MonoBehaviour
     private Vector3 curPos;
     private float shift = 0.01f;
     public static bool canBuild = false;
-    static public int bonusScore;
-    private int allPoint;
+    static public int bonusScore, allPoint;
     [SerializeField]
     private Text addPointTxt, PointTxt;
 

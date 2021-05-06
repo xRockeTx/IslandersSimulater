@@ -1,6 +1,4 @@
-﻿using UnityEditorInternal;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class ColCheck : MonoBehaviour
 {
@@ -11,11 +9,7 @@ public class ColCheck : MonoBehaviour
 		{
 			BuildScr.canBuild = true;
 		}
-		if (coll.gameObject.CompareTag("Mask"))
-		{
-			
-		}
-		else if (!coll.gameObject.CompareTag(groundTag))
+		if (!coll.gameObject.CompareTag(groundTag)&&!coll.gameObject.CompareTag("Mask"))
 		{
 			BuildScr.canBuild = false;
 		}
@@ -23,7 +17,7 @@ public class ColCheck : MonoBehaviour
 	}
 	private void OnTriggerEnter(Collider coll)
 	{
-		if (coll.gameObject.CompareTag(groundTag) || coll.gameObject.CompareTag("Mask"))
+		if (coll.gameObject.CompareTag(groundTag))
 		{
 			BuildScr.canBuild = true;
 		}

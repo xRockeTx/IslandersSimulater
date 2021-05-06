@@ -8,55 +8,44 @@ public class CollectPoints : MonoBehaviour
     private string[] increasePointTag, decreasePointTag;
     [SerializeField]
     private int[] increasePoint, decreasePoint;
-    private int index=0;
     private void OnTriggerEnter(Collider other)
     {
-        index = 0;
-        foreach (string pointTag in increasePointTag)
-        {
-            if (other.tag == pointTag)
-            {
-                BuildScr.bonusScore += increasePoint[index];
-                index = 0;
-                break;
-            }
-            index++;
-        }
-        index = 0;
-        foreach (string pointTag in decreasePointTag)
-        {
-            if (other.tag == pointTag)
-            {
-                BuildScr.bonusScore -= decreasePoint[index];
-                index = 0;
-                break;
-            }
-            index++;
-        }
+        CheckTag(other.tag, 1, increasePointTag, increasePoint);
+        CheckTag(other.tag, 2, decreasePointTag, decreasePoint);
     }
     private void OnTriggerExit(Collider other)
     {
-        index = 0;
-        foreach (string pointTag in increasePointTag)
+        CheckTag(other.tag,2 , increasePointTag, increasePoint);
+        CheckTag(other.tag,1 , decreasePointTag, decreasePoint);
+    }
+    private void CheckTag(string otherTag,int option,string[] PointTag,int[] Point)
+    {
+        if (option == 1) // Проверка на вариант событий " + "
         {
-            if (other.tag == pointTag)
+            int index = 0; // Индекс проверяемого элемента
+            foreach (string pointTag in PointTag) // Пересматривает полученный массив на наличие тега
             {
-                BuildScr.bonusScore -= increasePoint[index];
-                index = 0;
-                break;
+                if (otherTag == pointTag) // Если наш тег не входит то метод заканчивает свою работу и ничего не происходит
+                {
+                    BuildScr.bonusScore += Point[index]; // Изменяем получаемые очки в другом скрипте
+                    break; // Если наш тег есть в массиве то эктренно завершаем оперицию foreach 
+                }
+                index++; // После проверки прошлого индекса делаем проверку следующего
             }
-            index++;
         }
-        index = 0;
-        foreach (string pointTag in decreasePointTag)
+        else if (option == 2) // Проверка на вариант событий " - "
         {
-            if (other.tag == pointTag)
+            int index = 0; // Индекс проверяемого элемента
+            foreach (string pointTag in PointTag) // Пересматривает полученный массив на наличие тега
             {
-                BuildScr.bonusScore += decreasePoint[index];
-                index = 0;
-                break;
+                if (otherTag == pointTag) // Если наш тег не входит то метод заканчивает свою работу и ничего не происходит
+                {
+                    BuildScr.bonusScore -= Point[index]; // Изменяем получаемые очки в другом скрипте
+                    break; // Если наш тег есть в массиве то эктренно завершаем оперицию foreach 
+                }
+                index++; // После проверки прошлого индекса делаем проверку следующего
             }
-            index++;
         }
+        
     }
 }
