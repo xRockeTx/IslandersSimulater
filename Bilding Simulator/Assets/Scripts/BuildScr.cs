@@ -1,20 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Drawing;
 
 public class BuildScr : MonoBehaviour
 {
+    [SerializeField] private GameObject allBuild;
+    private Transform build;
     public Transform[] original, mask;
     private Transform tmp_original, tmp_mask;
     private Vector3 curPos;
     private float shift = 0.01f;
     public static bool canBuild = false;
+
     static public int bonusScore, allPoint;
-    [SerializeField]
-    private Text addPointTxt, PointTxt;
+    [SerializeField] private Text addPointTxt, PointTxt;
 
     public void SetMask(int id)
     {
@@ -44,6 +42,7 @@ public class BuildScr : MonoBehaviour
                 tmp_original.gameObject.SetActive(true);
                 tmp_original.position = tmp_mask.position;
                 tmp_original.localEulerAngles = tmp_mask.localEulerAngles;
+                tmp_original.SetParent(allBuild.transform);
                 tmp_original = null;
                 Destroy(tmp_mask.gameObject);
             }
@@ -66,5 +65,13 @@ public class BuildScr : MonoBehaviour
     {
         Destroy(tmp_original.gameObject);
         Destroy(tmp_mask.gameObject);
+    }
+    public void DestroyChild()
+    {
+        for (int i = 0; i < allBuild.transform.childCount; i++)
+        {
+            build = allBuild.transform.GetChild(i);
+            Destroy(build.gameObject);
+        }
     }
 }

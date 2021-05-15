@@ -2,10 +2,10 @@
 
 public class ColCheck : MonoBehaviour
 {
-	private string groundTag = "Ground";
+	private const string groundTag = "Ground"; // Тег плоскости который нельзя изменять
 	private void OnTriggerStay(Collider coll)
 	{
-		if (coll.gameObject.CompareTag(groundTag))
+		if (coll.gameObject.CompareTag(groundTag)) // Проверка тега
 		{
 			BuildScr.canBuild = true;
 		}

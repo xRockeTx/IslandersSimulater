@@ -217,5 +217,5 @@ MonoBehaviour:
   - Woodcutter
   - Quarry
   - GoldMine
-  increasePoint: 050000000a00000004000000
+  increasePoint: 050000006400000004000000
   decreasePoint: 030000000300000003000000
